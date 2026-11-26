@@ -45,8 +45,23 @@ if (file_exists($vendorAutoload)) {
 // 4. Jalankan CORS & header JSON
 require_once __DIR__ . '/config/cors.php';
 
-// 5. Mulai session PHP
+// 5. Konfigurasi dan mulai session PHP
 if (session_status() === PHP_SESSION_NONE) {
+
+    ini_set('session.use_strict_mode', '1');
+    ini_set('session.use_only_cookies', '1');
+
+    session_name('SUDUTBIRU_SESSION');
+
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path'     => '/pos-sudut-biru-be/',
+        'secure'   => !empty($_SERVER['HTTPS'])
+                      && $_SERVER['HTTPS'] !== 'off',
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+
     session_start();
 }
 
