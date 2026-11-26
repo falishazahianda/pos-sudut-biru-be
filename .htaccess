@@ -1,0 +1,17 @@
+
+# Nonaktifkan directory listing
+Options -Indexes
+
+# Lindungi file konfigurasi dan file internal
+<FilesMatch "(?i)^(\..*|composer\.(json|lock)|bootstrap\.php|README\.md|API_CONTRACT\.md)$">
+    Require all denied
+</FilesMatch>
+
+# Lindungi file database, log, dan backup
+<FilesMatch "(?i)\.(sql|log|ini|bak|env|lock)$">
+    Require all denied
+</FilesMatch>
+
+# Blokir akses langsung ke folder internal
+RewriteEngine On
+RewriteRule ^(config|helpers|database|vendor|\.git)(/|$) - [F,L,NC]

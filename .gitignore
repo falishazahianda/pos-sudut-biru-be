@@ -1,5 +1,19 @@
-.DS_Store
+# Environment
 .env
+.env.*
+!.env.example
+# Dependencies
 /vendor/
+# Operating system
+.DS_Store
+# Editor
+.vscode/
+# Uploaded files
+/uploads/*
+!/uploads/.htaccess
+!/uploads/.gitkeep
+!/uploads/menus/
 /uploads/menus/*
 !/uploads/menus/.gitkeep
+# Logs
+*.log
