@@ -1,0 +1,9 @@
+{
+    "name": "sudut-biru/pos-backend",
+    "description": "Backend API Sudut Biru POS",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "phpmailer/phpmailer": "^7.2"
+    }
+}

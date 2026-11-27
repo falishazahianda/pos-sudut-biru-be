@@ -14,7 +14,6 @@ sendResponse(200, 'success', 'Session aktif.', [
 
     'user' => [
         'id'         => (int) $user['id'],
-        'staff_code' => $user['staff_code'],
         'name'       => $user['name'],
         'username'   => $user['username'],
         'email'      => $user['email'],

@@ -47,7 +47,6 @@ if (!in_array($role, ['admin', 'kasir'], true)) {
 $stmt = $pdo->prepare("
     SELECT
         id,
-        staff_code,
         name,
         username,
         email,
@@ -98,7 +97,6 @@ sendResponse(200, 'success', 'Login berhasil.', [
 
     'user' => [
         'id'          => (int) $user['id'],
-        'staff_code'  => $user['staff_code'],
         'name'        => $user['name'],
         'username'    => $user['username'],
         'email'       => $user['email'],

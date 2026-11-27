@@ -65,7 +65,7 @@ Request body:
 
 ```json
 {
-    "username": "feylisha.admin",
+    "username": "FA1707",
     "password": "PASSWORD_ASLI",
     "role": "admin"
 }
@@ -82,9 +82,8 @@ Response 200:
     "data": {
         "user": {
             "id": 1,
-            "staff_code": "FA1707",
             "name": "Feylisha Azzahra",
-            "username": "feylisha.admin",
+            "username": "FA1707",
             "email": "admin@sudutbiru.id",
             "role": "admin",
             "shift_id": null,
@@ -168,3 +167,83 @@ Upcoming Features:
 - Shift management
 - Staff management
 - Dashboard and reports
+
+
+## Forgot Password
+
+Endpoint: POST /api/auth/forgot-password.php
+
+Authentication: Tidak diperlukan
+CSRF Token: Tidak diperlukan
+
+Request Body:
+{
+    "email": "user@gmail.com"
+}
+
+Success Response (200):
+{
+    "status": "success",
+    "message": "Jika email terdaftar, link reset password akan dikirim.",
+    "data": null
+}
+
+Ketentuan:
+- Berlaku untuk Admin dan Kasir.
+- Email harus terdaftar pada akun aktif.
+- Token berlaku selama 30 menit.
+- Token hanya dapat digunakan satu kali.
+- Cooldown permintaan: 1 menit per akun.
+- Permintaan baru yang diterima menonaktifkan token lama.
+- Response untuk email terdaftar dan tidak terdaftar sama.
+
+## Validate Reset Token
+
+Endpoint: GET /api/auth/reset-password.php?token=TOKEN
+
+Authentication: Tidak diperlukan
+
+Success Response (200):
+{
+    "status": "success",
+    "message": "Token valid.",
+    "data": {
+        "valid": true
+    }
+}
+
+Error Response (400):
+Token tidak valid, kedaluwarsa, atau sudah digunakan.
+
+## Reset Password
+
+Endpoint: POST /api/auth/reset-password.php
+
+Authentication: Tidak diperlukan
+CSRF Token: Tidak diperlukan
+
+Request Body:
+{
+    "token": "TOKEN_DARI_EMAIL",
+    "password": "PasswordBaru123!",
+    "confirm_password": "PasswordBaru123!"
+}
+
+Success Response (200):
+{
+    "status": "success",
+    "message": "Password berhasil direset. Silakan login kembali.",
+    "data": null
+}
+
+Ketentuan:
+- Password minimal 8 byte dan maksimal 72 byte.
+- Password dan confirm_password harus sama.
+- Token wajib valid dan belum digunakan.
+- Seluruh session lama pengguna dinonaktifkan.
+- Pengguna diarahkan kembali ke halaman login.
+
+Error Codes:
+- 400: Token tidak valid.
+- 422: Input password tidak valid.
+- 500: Kesalahan server.

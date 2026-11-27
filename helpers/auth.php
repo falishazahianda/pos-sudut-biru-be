@@ -16,7 +16,6 @@ function requireLogin(): array
     $stmt = $pdo->prepare("
         SELECT
             id,
-            staff_code,
             name,
             username,
             email,

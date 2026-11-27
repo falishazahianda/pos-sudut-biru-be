@@ -18,7 +18,6 @@ USE sudut_biru_pos;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    staff_code VARCHAR(20) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(150) NOT NULL UNIQUE,
@@ -323,3 +322,6 @@ CREATE TABLE stock_movements (
 -- END OF DATABASE SCHEMA
 -- =====================================================
 
+UPDATE users
+SET email = 'azzahrafeylisha@gmail.com'
+WHERE username = 'FA1707';

@@ -15,27 +15,24 @@ INSERT INTO users (
     is_active
 ) VALUES
 (
-    'FA1707',
     'Feylisha Azzahra',
-    'feylisha.admin',
+    'FA1707',
     'admin@sudutbiru.id',
     '$2y$12$kKm6LQVTfi8Jqfv5/tFUVuvRGe.vLXZ47NzdJR/iC/9dKBHdlOkwC',
     'admin',
     1
 ),
 (
-    'DS1708',
     'Dimas Saputra',
-    'dimas.kasir',
+    'DS1708',
     'kasir@sudutbiru.id',
     '$2y$12$6pWqJpyx37CxcLCTapYzFe1yM8O4pl4rh7Xp5YP5kZmDmOzjYkPFi',
     'kasir',
     1
 ),
 (
-    'AL1709',
     'Ayu Lestari',
-    'ayu.kasir',
+    'AL1709',
     'ayu@sudutbiru.id',
     '$2y$12$uX1vMwmVwNxGPxGaLPS34u/WVPCImnjoyKKFSAJrfCDuHk9WHq4cK',
     'kasir',
@@ -107,7 +104,6 @@ WHERE m.kode_menu = 'BR-005';
 
 SELECT
     id,
-    staff_code,
     name,
     username,
     email,
@@ -122,3 +118,4 @@ FROM users;
 use sudut_biru_pos;
 DELETE FROM users
 WHERE id = 5;
+
