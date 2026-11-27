@@ -247,3 +247,126 @@ Error Codes:
 - 400: Token tidak valid.
 - 422: Input password tidak valid.
 - 500: Kesalahan server.
+
+
+## Get Profile
+
+Endpoint: GET /api/auth/profile.php
+
+Authentication: Required
+CSRF Token: Not required
+Role: Admin, Kasir
+
+Success Response (200):
+{
+    "status": "success",
+    "message": "Profil berhasil diambil.",
+    "data": {
+        "user": {
+            "id": 1,
+            "name": "Feylisha Azzahra",
+            "username": "FA1707",
+            "email": "user@gmail.com",
+            "role": "admin",
+            "is_active": true,
+            "shift_id": null,
+            "must_change_password": false
+        }
+    }
+}
+
+Error Codes:
+- 401: Session tidak valid.
+
+
+## Update Profile
+
+Endpoint: PUT /api/auth/profile.php
+
+Authentication: Required
+CSRF Token: Required
+Role: Admin, Kasir
+
+Headers:
+- Content-Type: application/json
+- X-CSRF-Token: TOKEN_CSRF
+
+Request Body:
+{
+    "name": "Nama Lengkap Baru"
+}
+
+Success Response (200):
+{
+    "status": "success",
+    "message": "Profil berhasil diperbarui.",
+    "data": {
+        "user": {
+            "id": 1,
+            "name": "Nama Lengkap Baru",
+            "username": "FA1707",
+            "email": "user@gmail.com",
+            "role": "admin",
+            "is_active": true,
+            "shift_id": null,
+            "must_change_password": false
+        }
+    }
+}
+
+Ketentuan:
+- Pengguna hanya dapat mengubah profil sendiri.
+- Nama wajib diisi, maksimal 100 karakter.
+- Username, email, role, dan status tidak dapat
+  diubah melalui endpoint ini.
+
+Error Codes:
+- 401: Session tidak valid.
+- 403: CSRF token tidak valid.
+- 422: Input tidak valid.
+
+
+## Change Password
+
+Endpoint: POST /api/auth/change-password.php
+
+Authentication: Required
+CSRF Token: Required
+Role: Admin, Kasir
+
+Headers:
+- Content-Type: application/json
+- X-CSRF-Token: TOKEN_CSRF
+
+Request Body:
+{
+    "current_password": "PasswordLama",
+    "new_password": "PasswordBaru123!",
+    "confirm_password": "PasswordBaru123!"
+}
+
+Success Response (200):
+{
+    "status": "success",
+    "message": "Password berhasil diperbarui.",
+    "data": {
+        "csrf_token": "TOKEN_CSRF_BARU"
+    }
+}
+
+Ketentuan:
+- Password lama wajib benar.
+- Password baru minimal 8 byte dan maksimal 72 byte.
+- Password baru harus berbeda dari password lama.
+- Konfirmasi password harus sesuai.
+- Session perangkat saat ini tetap aktif.
+- Session perangkat lain dinonaktifkan.
+- Reset password token sebelumnya dinonaktifkan.
+- Frontend wajib memperbarui CSRF token
+  menggunakan token baru dari response.
+
+Error Codes:
+- 401: Session tidak valid.
+- 403: CSRF token tidak valid.
+- 422: Input atau password tidak sesuai.
+- 500: Kesalahan server.
